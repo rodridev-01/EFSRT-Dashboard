@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="style.css">
-  <link href="Icons/Logo.ico" rel="icon">
+  <link rel="stylesheet" href="/Styles/user.css">
+  <link href="/Icons/Logo.ico" rel="icon">
   <script defer src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-  <script defer src="main.js"></script>
+  <script defer src="/main.js"></script>
   <title>EFSRT Dashboard</title>
 </head>
 
@@ -21,7 +21,7 @@
     <div>
       <div class="logo">
         <img
-          src="Icons/Logo.ico"
+          src="/Icons/Logo.ico"
           alt="logo" />
       </div>
 
@@ -30,15 +30,15 @@
         <p>Usuario</p>
       </div>
       <ul>
-        <li class="nav-item">
-          <a href="Pages/user.html">
+        <li class="nav-item active">
+          <a href="/Pages/user.html">
             <i class="fa fa-user nav-icon"></i>
             <span class="nav-text">Cuenta</span>
           </a>
         </li>
 
-        <li class="nav-item active">
-          <a href="index.html">
+        <li class="nav-item">
+          <a href="/index.html">
             <i class="fa-solid fa-table nav-icon"></i>
             <span class="nav-text">Tablero</span>
           </a>
@@ -98,6 +98,45 @@
         </div>
       </div>
 
+      <div class="user-profile">
+        <h1>User profile</h1>
+        <div>
+          <div class="user-container">
+            <div class="profile-container">
+              <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
+              <p>Usuario</p>
+            </div>
+            <div class="data-container">
+              <div class="data-row">
+                <p>User profile</p>
+                <div>
+                  <div class="data-items"><strong>Name:</strong><p>Alonso Peña</p></div>
+                  <div class="data-items"><strong>Gender:</strong><p>Male</p></div>
+                  <div class="data-items"><strong>Age:</strong><p>19</p></div>
+                </div>
+              </div>
+              <div class="data-row">
+                <p>Student information</p>
+                <div>
+                  <div class="data-items"><strong>Career:</strong><p>Computing and IT</p></div>
+                  <div class="data-items"><strong>Cycle:</strong><p>VI</p></div>
+                  <div class="data-items"><strong>State:</strong><p>Student</p></div>
+                </div>
+              </div>
+              <div class="data-row">
+                <p>Setting</p>
+                <div>
+                  <div class="data-items"><strong>Languaje:</strong><p>English</p></div>
+                  <div class="data-items"><strong>UI Color:</strong><p>White</p></div>
+                  <div class="data-items"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--
       <div class="upcoming-events">
         <h1>Tablero</h1>
         <div class="event-container">
@@ -201,6 +240,7 @@
           </div>
         </div>
       </div>
+      !-->
     </div>
 
     <div class="right-content">
