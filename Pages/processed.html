@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="/Styles/style.css">
+  <link href="/Icons/Logo.ico" rel="icon">
+  <script defer src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <script defer src="/main.js"></script>
+  <title>EFSRT Dashboard</title>
+</head>
+
+<body>
+  <nav class="main-menu">
+    <div>
+      <div class="logo">
+        <img
+          src="/Icons/Logo.ico"
+          alt="logo" />
+      </div>
+
+      <div class="user-info">
+        <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="user" />
+        <p>User</p>
+      </div>
+      <ul>
+        <li class="nav-item">
+          <a href="/Pages/user.html">
+            <i class="fa fa-user nav-icon"></i>
+            <span class="nav-text">Cuenta</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/index.html">
+            <i class="fa-solid fa-table nav-icon"></i>
+            <span class="nav-text">Tablero</span>
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a href="#">
+            <i class="fa fa-arrow-trend-up nav-icon"></i>
+            <span class="nav-text">Tramite</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#">
+            <i class="fa-solid fa-chart-simple nav-icon"></i>
+            <span class="nav-text">Estado</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#">
+            <i class="fa fa-circle-info nav-icon"></i>
+            <span class="nav-text">Ayuda</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <ul>
+      <li class="nav-item">
+        <a href="#">
+          <i class="fa fa-right-from-bracket nav-icon"></i>
+          <span class="nav-text">Salir</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="content">
+    <div class="left-content">
+      <div class="search-and-check">
+        <form class="search-box">
+          <input type="text" placeholder="Buscar..." />
+          <i class="bx bx-search"></i>
+        </form>
+        <div class="interaction-control-mobile interactions">
+          <i class="fa-regular fa-envelope notified"></i>
+          <i class="fa-regular fa-bell notified"></i>
+          <div class="toggle" onclick="switchTheme()">
+            <div class="mode-icon moon">
+              <i class="bx bxs-moon"></i>
+            </div>
+            <div class="mode-icon sun hidden">
+              <i class="bx bxs-sun"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form">
+        <form class="user-form">
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="apellidoPaterno">Apellido Paterno</label>
+                    <input type="text" id="apellidoPaterno" placeholder="A. Paterno">
+                </div>
+                <div class="form-col">
+                    <label for="apellidoMaterno">Apellido Materno</label>
+                    <input type="text" id="apellidoMaterno" placeholder="A. Materno">
+                </div>
+                <div class="form-col">
+                    <label for="nombres">Nombres</label>
+                    <input type="text" id="nombres" placeholder="Nombres">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="tipoDocumento">Tipo de documento</label>
+                    <select id="tipoDocumento">
+                        <option>Selecciona un documento</option>
+                        <option>DNI</option>
+                        <option>Pasaporte</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label for="nroDocumento">Nro Documento</label>
+                    <input type="text" id="nroDocumento" placeholder="Nro Documento">
+                </div>
+                <div class="form-col">
+                    <label for="codigoModular">Código Modular</label>
+                    <input type="text" id="codigoModular" placeholder="Código Modular">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" placeholder="Teléfono">
+                </div>
+                <div class="form-col">
+                    <label for="celular">Celular</label>
+                    <input type="text" id="celular" placeholder="Celular">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="correoInstitucional">Correo Institucional</label>
+                    <input type="email" id="correoInstitucional" placeholder="example@jpardo.edu.pe">
+                </div>
+                <div class="form-col">
+                    <label for="correoPersonal">Correo Personal</label>
+                    <input type="email" id="correoPersonal" placeholder="example@xxxxxx.com">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" placeholder="Domicilio">
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="departamento">Departamento</label>
+                    <select id="departamento" name="selectDepartamento" onchange="cambia()" required="">
+                      <option value="">Seleccione</option>
+                      <option value="Amazonas">Amazonas</option>
+                      <option value="Ancash">Ancash</option>
+                      <option value="Apurímac">Apurímac</option>
+                      <option value="Arequipa">Arequipa</option>
+                      <option value="Ayacucho">Ayacucho</option>
+                      <option value="Cajamarca">Cajamarca</option>
+                      <option value="Callao">Callao</option>
+                      <option value="Cuzco">Cuzco </option>
+                      <option value="Huancavelica">Huancavelica</option>
+                      <option value="Huánuco">Huánuco</option>
+                      <option value="Ica">Ica</option>
+                      <option value="Junín">Junín</option>
+                      <option value="La_Libertad">La Libertad</option>
+                      <option value="Lambayeque">Lambayeque</option>
+                      <option value="Lima">Lima</option>
+                      <option value="Loreto">Loreto</option>
+                      <option value="Madre_de_Dios">Madre de Dios</option>
+                      <option value="Moquegua">Moquegua</option>
+                      <option value="Pasco">Pasco</option>
+                      <option value="Piura">Piura</option>
+                      <option value="Puno">Puno</option>
+                      <option value="San_Martín">San Martín</option>
+                      <option value="Tacna">Tacna</option>
+                      <option value="Tumbes">Tumbes</option>
+                      <option value="Ucayali">Ucayali</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label for="provincia">Provincia</label>
+                    <select id="provincia" name="selectProvincia" onchange="cambiaDistrito()" required="">
+                        <option>Seleccione la Provincia</option>
+                    </select>
+                </div>
+                <div class="form-col" >
+                    <label for="distrito">Distrito</label>
+                    <select id="distrito" name="selectDistrito" required="">
+                        <option>Seleccione el Distrito</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="especialidad">Especialidad</label>
+                    <select id="especialidad">
+                        <option>Selecciona</option>
+                        <option>Computación e Informática</option>
+                        <option>Construcción Civil</option>
+                        <option>Electrotecnia Industrial(Electricidad)</option>
+                        <option>Electrónica Industrial</option>
+                        <option>Metalurgia</option>
+                        <option>Mecánica de Producción</option>
+                        <option>Mecánica Automotriz</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label for="anioIngreso">Año Ingreso</label>
+                    <input type="text" id="anioIngreso" placeholder="YYYY">
+                </div>
+                <div class="form-col">
+                    <label for="anioEgreso">Año Egreso (Opcional)</label>
+                    <input type="text" id="anioEgreso" placeholder="YYYY">
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Enviar Solicitud</button>
+        </form>
+    </div>
+
+      
+  
+    </div>
+
+    <div class="right-content">
+      <div class="interaction-control interactions">
+        <i class="fa-regular fa-envelope notified"></i>
+        <i class="fa-regular fa-bell notified"></i>
+        <div class="toggle" onclick="switchTheme()">
+          <div class="mode-icon moon">
+            <i class="bx bxs-moon"></i>
+          </div>
+          <div class="mode-icon sun hidden">
+            <i class="bx bxs-sun"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="analytics">
+        <h1>Análisis</h1>
+        <div class="analytics-container">
+          <div class="total-events">
+            <div class="event-number card">
+              <h2>Aprobados</h2>
+              <p>1</p>
+              <i class="bx bx-check-circle"></i>
+            </div>
+            <div class="event-number card">
+              <h2>Pendientes</h2>
+              <p>2</p>
+              <i class="bx bx-timer"></i>
+            </div>
+          </div>
+
+          <div class="chart" id="doughnut-chart">
+            <h2>Porcentaje del Tramite</h2>
+            <canvas id="doughnut"></canvas>
+            <ul></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="contacts">
+        <h1>Contactos</h1>
+        <div class="contacts-container">
+          <div class="contact-status">
+            <div class="contact-activity">
+              <img
+                src="https://steamuserimages-a.akamaihd.net/ugc/1826783377633780689/E64CC69793E77EC9C7F172329346A6A88797DA3D/"
+                alt="User Icon" />
+              <p>Fett <span><a target="_blank"
+                    href="https://github.com/rodridev-01">Developer</a></span></p>
+            </div>
+            <small>1 hour ago</small>
+          </div>
+        </div>
+        <div class="contacts-container">
+          <div class="contact-status">
+            <div class="contact-activity">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png"
+                alt="User Icon" />
+              <p>Usuario <span><a target="_blank"
+                    href="https://github.com/Alonso-dev651">Developer</a></span></p>
+            </div>
+            <small>1 hour ago</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
