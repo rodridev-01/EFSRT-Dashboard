@@ -559,3 +559,130 @@ function cambiaDistrito()
  }
  sel_distrito.options[0].selected = true;     
 }
+
+function showFileName() {
+  const fileInput = document.getElementById('fileUpload');
+  const fileName = document.getElementById('file-name');
+  if (fileInput.files.length > 0) {
+    let fileList = Array.from(fileInput.files).map(file => file.name).join(', ');
+    fileName.textContent = fileList;
+  } else {
+    fileName.textContent = 'No se ha seleccionado ningún archivo';
+  }
+}
+
+
+
+//New
+let currentIndex = 0;
+let totalRequests = 0;
+let requestsData = [];
+
+function fetchRequest(index) {
+  const data = requestsData[index]; 
+  if (data) {
+      document.getElementById('request-info').innerHTML = `
+          <h2>Solicitud ${index + 1} de ${totalRequests}</h2>
+          <p><strong>Especialidad:</strong> ${data.especialidad || "No disponible"}</p>
+          <p><strong>Tipo de Trámite:</strong> ${data.tipo_tramite || "No disponible"}</p>
+          <p><strong>Descripción:</strong> ${data.descripcion.replace(/\n/g, '<br>') || "No disponible"}</p>
+          <p><strong>Archivos:</strong></p>
+          <ul>
+              ${data.archivos ? data.archivos.split(',').map(archivo => `
+                  <li><a href="#" class="download-link" data-filename="${archivo}">${archivo}</a></li>
+              `).join('') : "No hay archivos."}
+          </ul>
+      `;
+
+      const downloadLinks = document.querySelectorAll('.download-link');
+      downloadLinks.forEach(link => {
+          link.addEventListener('click', async function(event) {
+              event.preventDefault(); 
+              const fileName = this.getAttribute('data-filename');
+              const fileUrl = `http://localhost/EFSRT/api/uploads/${fileName}`;
+              
+              try {
+                  const response = await fetch(fileUrl);
+                  if (!response.ok) {
+                      throw new Error('Error en la descarga: ' + response.statusText);
+                  }
+                  const blob = await response.blob();
+                  const fileHandle = await window.showSaveFilePicker({
+                      suggestedName: fileName,
+                      types: [{
+                          description: 'Archivos',
+                          accept: {'*/*': ['.txt', '.pdf', '.doc', '.docx', '.png', '.jpg']}, 
+                      }],
+                  });
+                  const writable = await fileHandle.createWritable();
+                  await writable.write(blob);
+                  await writable.close();
+                  console.log(`Archivo ${fileName} guardado exitosamente.`);
+              } catch (error) {
+                  console.error('Error al descargar el archivo:', error);
+              }
+          });
+      });
+
+      document.getElementById('prev-btn').style.display = index > 0 ? 'inline' : 'none';
+      document.getElementById('next-btn').style.display = index < totalRequests - 1 ? 'inline' : 'none';
+  } else {
+      document.getElementById('request-info').innerHTML = "No hay solicitudes disponibles.";
+  }
+}
+
+
+function fetchTotalRequests() {
+  fetch('http://localhost/EFSRT/Api/fetch_requests.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la red: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            requestsData = data; 
+            totalRequests = data.length;
+            fetchRequest(currentIndex);
+        })
+        .catch(error => {
+            console.error('Error al cargar la lista de solicitudes:', error);
+        });
+}
+
+document.getElementById('prev-btn').onclick = function() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        fetchRequest(currentIndex);
+    }
+};
+
+document.getElementById('next-btn').onclick = function() {
+    if (currentIndex < totalRequests - 1) {
+        currentIndex++;
+        fetchRequest(currentIndex);
+    }
+};
+
+document.getElementById('refresh-btn').onclick = function() {
+    fetchTotalRequests();
+};
+
+fetchTotalRequests();
+
+
+document.getElementById('cargar-boton').onclick = function() {
+  fetch('./Pages/user.html') 
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Error al cargar el contenido');
+          }
+          return response.text();
+      })
+      .then(data => {
+          document.getElementById('contenido-dinamico').innerHTML = data;
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+};
